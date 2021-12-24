@@ -1,18 +1,11 @@
-import React,{ useEffect } from 'react'
+import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
-
-import Favorito from './Favorito'
+import CheckboxFavorite from './CheckboxFavorite'
 
 
 //imports de redux
 import { useDispatch, useSelector } from "react-redux";
-import {
-  obtenerPlanetasAccion
-  
-  
-} from "../redux/planetsDucks";
-
-
+import {obtenerPlanetasAccion,addToFavorite} from "../redux/planetsDucks";
 const Container = styled.div`
 border: 1px solid black;
 width: 230px;
@@ -23,12 +16,36 @@ color:white;
 border-radius:4px;
 margin:5px 10px 15px 10px;
 align-items:flex-start;
-padding-left: 15px
+padding-left: 15px;
+max-height:500px;
+padding-bottom:20px;
+&:hover{
+    box-shadow: 5px 5px 5px 0px rgba(255,255,255,0.2);
+}
+`
+const PClassname = styled.div`
+display:flex;
+width:248px;
+justify-content: space-between;
+`
+const PValues = styled.p`
+font-size:16px;
+margin: 3px 0 5px 0;
+text-transform: uppercase;
+`
+const Parrafos = styled.p`
+color:grey
+`
+const ValuesTerrain = styled.p`
+font-size:16px;
+margin: 5px 0 10px 0;
+text-transform: uppercase;
 `
 
 
 const Cards = () => {
 
+    const [favorito, setFavorito] = useState([])
     const dispatch = useDispatch();
 
     const planetas = useSelector((store) => store.planetas.array);
@@ -37,28 +54,42 @@ const Cards = () => {
         dispatch(obtenerPlanetasAccion())
       }, [])
 
+    /*   const handleFavorite  = (planet) =>{
+        setFavorito([...favorito,planet])
+        
+    } */
+    useEffect(() => {
+        dispatch(addToFavorite(favorito))
+       }, [favorito])
+
+    
+    
+     console.log('aca el favorito', favorito)
+
     return (
         <>
         {
             planetas.map((item) => (
 
         <Container key={item.name}>
-            <div className='name'>
-                <p>name</p>
-                <Favorito/>
-                <p>{item.name}</p>
+            <div>
+                <PClassname>
+                <Parrafos>Name</Parrafos>
+                <CheckboxFavorite setFavorito={setFavorito} favorito={favorito} item={item} />
+                </PClassname>
+                <PValues>{item.name}</PValues>
             </div>
             <div className='diameter'>
-                <p>diameter</p>
-                <p>{item.diameter}</p>
+                <Parrafos>Diameter</Parrafos>
+                <PValues>{item.diameter}</PValues>
             </div>
             <div className='climate'>
-                <p>Climate</p>
-                <p>{item.climate}</p>
+                <Parrafos>Climate</Parrafos>
+                <PValues>{item.climate}</PValues>
             </div>
             <div className='terrain'>
-                <p>Terrain</p>
-                <p>{item.terrain}</p>
+                <Parrafos>Terrain</Parrafos>
+                <ValuesTerrain>{item.terrain}</ValuesTerrain>
             </div>
        
         </Container>

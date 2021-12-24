@@ -44,7 +44,7 @@ export const obtenerPlanetasAccion = () => async (dispatch, getState) =>{
             type:'OBTENER_PLANETAS_EXITO',
             payload: res.data.results
         })
-        console.log(res.data)
+        
     }catch(error){
         console.log(error)
     }
@@ -92,7 +92,7 @@ export const addToFavorite =(favorito) => (dispatch,getState) =>{
 
     dispatch({
         type: ADD_TO_FAVORITE,
-        payload: [...favorito,favorito] 
+        payload: favorito
     })
 }
 

@@ -7,7 +7,7 @@ const Contenedor = styled.div `
 background:black;
 display : flex;
 padding:30px;
-justify-content:space-between;
+justify-content:space-around;
 align-items: center;
 `
 
