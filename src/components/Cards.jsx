@@ -4,7 +4,7 @@ import CheckboxFavorite from './CheckboxFavorite'
 
 //imports de redux
 import { useDispatch, useSelector } from "react-redux";
-import {obtenerPlanetasAccion,addToFavorite, allPlanets} from "../redux/planetsDucks";
+import {obtenerPlanetasAccion,addToFavorite} from "../redux/planetsDucks";
 
 const Container = styled.div`
 border: 1px solid black;
@@ -54,7 +54,7 @@ const Cards = () => {
     const resultados = useSelector((store) =>store.planetas.searchResult)
 
     useEffect(() => {
-        dispatch(obtenerPlanetasAccion([...favorito]))
+        dispatch(obtenerPlanetasAccion())
         
       }, []) 
       

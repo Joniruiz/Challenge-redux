@@ -18,7 +18,9 @@ align-items: center;
 export const Header = () => {
     return (
         <Contenedor>
+            <a href="/">
             <img src={Logo} alt="" />
+            </a>
             <Search/>
         </Contenedor>
     )

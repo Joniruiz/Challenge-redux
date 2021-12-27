@@ -6,4 +6,5 @@ El challenge consiste en desarrollar una app con React integrándola con Redux o
 La vista debe permitir buscar por nombre de planeta usando un input y un botón cada vez que se hace un click en buscar o apretar enter.
 La lista de planetas debe permitir también guardar uno o más planetas como favoritos en el estado y por último, crear una vista para ver los favoritos que hemos guardado.
 
-El Mayor desafio : Lo que mas me costo fue realizar el search 
+El Mayor desafio : Lo que mas me costo fue realizar el search.
+
