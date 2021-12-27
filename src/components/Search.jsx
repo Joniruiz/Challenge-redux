@@ -35,7 +35,7 @@ const Button = styled.button`
 
 const Search = () => {
 
-    const planetas = useSelector((store) => store.planetas.array);  // En casco de que quiera buscar por pagina , cambiar este dato del objeto por .array y tambien ejecutar la funcion obtenerPlanetasAccion()
+    const planetas = useSelector((store) => store.planetas.array);  
 
     const [planets , setPlanets] = useState([])
     const dispatch = useDispatch();
