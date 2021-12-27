@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import {siguientesPlanetasAccion,previaPlanetasAccion } from "../redux/planetsDucks";
+import {nextPage,prevPage } from "../redux/planetsDucks";
 import styled from 'styled-components'
 
 const Paged = styled.div`
@@ -24,6 +24,7 @@ const ButtonPage = styled.button`
   border-radius:5px;
   border:none;
   font-weight:999;
+  cursor:pointer;
 
   &:hover{
     background-color:yellow;
@@ -44,17 +45,17 @@ const Pages = () => {
     return (
         <Paged>
              {
-          count <= 1 ? null : <ButtonPage onClick={() => dispatch(previaPlanetasAccion())}>
+          count <= 1 ? null : <ButtonPage onClick={() => dispatch(prevPage())}>
            <i class="fas fa-chevron-left"></i> BACK
         </ButtonPage>
           
       }
       <NumberPage>{count}</NumberPage>
       
-      
-      <ButtonPage onClick={() => dispatch(siguientesPlanetasAccion())}>
+      {count >= 6 ? null : <ButtonPage onClick={() => dispatch(nextPage())}>
         NEXT <i className="fas fa-chevron-right"></i>
-      </ButtonPage>
+      </ButtonPage>}
+      
         </Paged>
     )
 }

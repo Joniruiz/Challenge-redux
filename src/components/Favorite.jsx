@@ -48,17 +48,19 @@ background-attachment: fixed;
 padding: 25px 0;
 margin-bottom:0px;
 `
-
 const ContainerCard = styled.div`
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin:0 auto;
     justify-content:center;
-   
+   height:100vh;
     `
 
-
+const MessageNoFavorites = styled.p`
+font-size: 32px;
+color: white;
+`
 
 const Favorite = () => {
     const [favorito, setFavorito] = useState([])
@@ -68,6 +70,7 @@ const Favorite = () => {
     console.log('que hay aca en favoritos ',favorites)
 
     useEffect(() => {
+        
         console.log(favorites)
     }, [favorites])
 
@@ -100,7 +103,7 @@ const Favorite = () => {
          </Container>
              ))
            :
-           <p>No hay Favoritos</p>
+           <MessageNoFavorites>No hay Favoritos</MessageNoFavorites>
            
 
         }

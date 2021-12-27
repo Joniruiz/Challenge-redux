@@ -4,8 +4,9 @@ import generateStore from './redux/store';
 
 import { Header } from './components/Header';
 
-import ParteDeAbajo from './components/ParteDeAbajo';
 import AppRouter from './routers/AppRouter';
+
+
 
 
 function App() {
@@ -17,12 +18,10 @@ function App() {
     <Provider store = {store}>
       
       <Header/>
-      
-      
-
       <AppRouter/>
       
     </Provider>
+    
     
   );
 }

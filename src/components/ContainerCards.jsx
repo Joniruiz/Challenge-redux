@@ -3,9 +3,8 @@ import Cards from './Cards'
 import styled from 'styled-components'
 import background from '../assets/backgroundstars2.jpg'
 import Pages from './Pages'
+
 import 'animate.css'
-
-
 
 const Fragment = styled.div`
 background-image: url(${background});
@@ -14,6 +13,7 @@ background-size:cover;
 background-attachment: fixed;
 padding: 25px 0;
 margin-bottom:0px;
+min-height:100vh;
 `
 
 const ContainerCard = styled.div`
@@ -23,6 +23,7 @@ const ContainerCard = styled.div`
     margin:0 auto;
     justify-content:center;
    
+
     
 `
 
@@ -33,6 +34,7 @@ const ContainerCards = () => {
             <Cards />     
        </ContainerCard>
         <Pages/>
+        
         </Fragment>
     )
 }

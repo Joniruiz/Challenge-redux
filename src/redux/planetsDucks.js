@@ -2,15 +2,19 @@ import axios from 'axios'
 
 // Const
 const dataInicial = {
+    allPlanets:[],
     array:[],
     count : 1 ,
-    favorite:[]
+    favorite:[],
+    searchResult:[]
 
 }
 const OBTENER_PLANETAS_EXITO ='OBTENER_PLANETAS_EXITO'
-const SIGUIENTE_PLANETA_EXITO ='SIGUIENTE_PLANETA_EXITO'
-const PAGINA_PREVIA_EXITO = 'PAGINA_PREVIA_EXITO'
+const NEXT_PAGE ='NEXT_PAGE'
+const PREV_PAGE = 'PREV_PAGE'
 const ADD_TO_FAVORITE = 'ADD_TO_FAVORITE'
+const ALL_PLANETS_EXITO =  'ALL_PLANETS_EXITO' 
+const SEARCH_RESULT = 'SEARCH_RESULT'
 
 //Reducer
 export default function planetReducer (state = dataInicial,action){
@@ -18,14 +22,18 @@ export default function planetReducer (state = dataInicial,action){
         case OBTENER_PLANETAS_EXITO:
             return{...state , array:action.payload}
 
-        case SIGUIENTE_PLANETA_EXITO:
+        case NEXT_PAGE:
             return{...state,array:action.payload.array , count: action.payload.count}
 
-        case PAGINA_PREVIA_EXITO:
+        case PREV_PAGE:
             return{...state,array:action.payload.array , count: action.payload.count}
        
         case ADD_TO_FAVORITE:
             return{...state , favorite: action.payload}
+        case ALL_PLANETS_EXITO:
+            return {...state,allPlanets:action.payload}
+        case SEARCH_RESULT:
+            return {...state,searchResult:action.payload}
         default:
             return state
     }
@@ -50,7 +58,7 @@ export const obtenerPlanetasAccion = () => async (dispatch, getState) =>{
     }
 }
 
-export const siguientesPlanetasAccion = () => async (dispatch,getState) =>{
+export const nextPage = () => async (dispatch,getState) =>{
 
     const count = getState().planetas.count
     const siguiente = count + 1
@@ -58,7 +66,7 @@ export const siguientesPlanetasAccion = () => async (dispatch,getState) =>{
     try {
         const res = await axios.get(`https://swapi.dev/api/planets/?page=${siguiente}`)
         dispatch({
-            type: SIGUIENTE_PLANETA_EXITO,
+            type: NEXT_PAGE,
             payload: {
                 array : res.data.results,
                 count: siguiente
@@ -69,7 +77,7 @@ export const siguientesPlanetasAccion = () => async (dispatch,getState) =>{
     }
 }
 
-export const previaPlanetasAccion = () => async (dispatch,getState) =>{
+export const prevPage = () => async (dispatch,getState) =>{
 
     const count = getState().planetas.count
     const anterior = count - 1
@@ -77,7 +85,7 @@ export const previaPlanetasAccion = () => async (dispatch,getState) =>{
     try {
         const res = await axios.get(`https://swapi.dev/api/planets/?page=${anterior}`)
         dispatch({
-            type: PAGINA_PREVIA_EXITO,
+            type: PREV_PAGE,
             payload: {
                 array : res.data.results,
                 count: anterior
@@ -96,3 +104,33 @@ export const addToFavorite =(favorito) => (dispatch,getState) =>{
     })
 }
 
+export const allPlanets = () => async(dispatch,getState) =>{
+
+    const promises = [
+        axios.get(`https://swapi.dev/api/planets/?page=1`),
+        axios.get(`https://swapi.dev/api/planets/?page=2`),
+        axios.get(`https://swapi.dev/api/planets/?page=3`),
+        axios.get(`https://swapi.dev/api/planets/?page=4`),
+        axios.get(`https://swapi.dev/api/planets/?page=5`),
+        axios.get(`https://swapi.dev/api/planets/?page=6`)
+    ]
+    const promise = await Promise.all(promises)
+    let res = []
+
+    promise.forEach(element =>{
+        res= [...res,...element]
+    })
+    console.log('estamos en planeta ducks',res)
+    dispatch({
+        type:ALL_PLANETS_EXITO,
+        payload: res.data.results
+    })
+}
+
+export const searchResultados = (searchResult) => (dispatch,getState) =>{
+    
+    dispatch({
+        type: SEARCH_RESULT,
+        payload: searchResult
+    })
+}

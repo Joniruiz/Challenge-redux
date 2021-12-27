@@ -2,10 +2,10 @@ import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
 import CheckboxFavorite from './CheckboxFavorite'
 
-
 //imports de redux
 import { useDispatch, useSelector } from "react-redux";
 import {obtenerPlanetasAccion,addToFavorite} from "../redux/planetsDucks";
+
 const Container = styled.div`
 border: 1px solid black;
 width: 230px;
@@ -19,6 +19,7 @@ align-items:flex-start;
 padding-left: 15px;
 max-height:500px;
 padding-bottom:20px;
+
 &:hover{
     box-shadow: 5px 5px 5px 0px rgba(255,255,255,0.2);
 }
@@ -49,26 +50,17 @@ const Cards = () => {
     const dispatch = useDispatch();
 
     const planetas = useSelector((store) => store.planetas.array);
+    const resultados = useSelector((store) =>store.planetas.searchResult)
 
     useEffect(() => {
         dispatch(obtenerPlanetasAccion())
-      }, [])
-
-    /*   const handleFavorite  = (planet) =>{
-        setFavorito([...favorito,planet])
-        
-    } */
+      }, []) 
     useEffect(() => {
         dispatch(addToFavorite(favorito))
        }, [favorito])
-
-    
-    
-     console.log('aca el favorito', favorito)
-
     return (
         <>
-        {
+        {(resultados.length === 0) ? 
             planetas.map((item) => (
 
         <Container key={item.name}>
@@ -93,7 +85,31 @@ const Cards = () => {
             </div>
        
         </Container>
-            ))
+            )):
+            (resultados.map(item => (
+                <Container key={item.name}>
+                <div>
+                    <PClassname>
+                    <Parrafos>Name</Parrafos>
+                    <CheckboxFavorite setFavorito={setFavorito} favorito={favorito} item={item} />
+                    </PClassname>
+                    <PValues>{item.name}</PValues>
+                </div>
+                <div className='diameter'>
+                    <Parrafos>Diameter</Parrafos>
+                    <PValues>{item.diameter}</PValues>
+                </div>
+                <div className='climate'>
+                    <Parrafos>Climate</Parrafos>
+                    <PValues>{item.climate}</PValues>
+                </div>
+                <div className='terrain'>
+                    <Parrafos>Terrain</Parrafos>
+                    <ValuesTerrain>{item.terrain}</ValuesTerrain>
+                </div>
+           
+            </Container>
+            )))
         }
         </>
     )

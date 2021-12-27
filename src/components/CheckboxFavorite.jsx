@@ -31,7 +31,7 @@ export default function IconCheckboxes({favorito,setFavorito,item}) {
 
   return (
     <div>
-      <Checkbox onClick={()=>handleFavorite(item)} className={styles.root} icon={<FavoriteBorder xs={{color:'white'}} />} checkedIcon={<Favorite />} />
+      <Checkbox onClick={()=>handleFavorite(item)} className={styles.root} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} />
       
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Container = styled.div`
     background-color:black;
@@ -10,7 +10,7 @@ const Container = styled.div`
     display:flex
     
 `
-const Enlace = styled.a`
+const Enlace = styled(Link)`
     font-size:24px;
     padding:8px;
     color: white;
@@ -23,8 +23,8 @@ const ParteDeAbajo = () => {
 
     return (
         <Container>
-            <Enlace href='/'>Planetas</Enlace>
-            <Enlace href="/favorite">Favoritos</Enlace>
+            <Enlace to='/'>Planetas</Enlace>
+            <Enlace to="/favorite">Favoritos</Enlace>
         </Container>
     )
 }
