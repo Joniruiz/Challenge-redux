@@ -14,13 +14,10 @@ function App() {
   return (
     
     <Provider store = {store}>
-      
-      
+
       <AppRouter/>
       
     </Provider>
-    
-    
   );
 }
 

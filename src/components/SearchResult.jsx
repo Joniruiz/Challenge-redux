@@ -55,10 +55,12 @@ const ContainerCard = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     margin:0 auto;
-    justify-content:center;
-   
+    justify-content:center;  
+`
 
-    
+const MessageNoPlanet = styled.p`
+font-size: 32px;
+color: white;
 `
 
 const SearchResult = () => {
@@ -71,7 +73,7 @@ const SearchResult = () => {
 
         <Fragment>
         <ContainerCard>
-        {resultados.length === 0 ? <p>no hay favoritos</p> :
+        {resultados.length === 0 ? <MessageNoPlanet>No tenemos un planeta con ese nombre</MessageNoPlanet> :
         resultados.map(item =>(
         <Container key={item.name}>
         <div>
