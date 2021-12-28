@@ -1,7 +1,9 @@
-import React, {useEffect,useState } from "react";
+import React from "react";
 import styled from 'styled-components'
-import {useSelector,useDispatch } from "react-redux";
-import {allPlanets,searchResultados} from '../redux/planetsDucks'
+import {useDispatch } from "react-redux";
+import {searchResultados} from '../redux/planetsDucks'
+import useForm from '../hooks/useForm'
+import {useNavigate} from 'react-router-dom';
 
 const SearchBar = styled.div`
     position:relative;
@@ -34,43 +36,27 @@ const Button = styled.button`
 `
 
 const Search = () => {
-
-    const planetas = useSelector((store) => store.planetas.array);  
-
-    const [planets , setPlanets] = useState([])
+    
+   const navigate = useNavigate();
+    const [{keywords}, handleInputChange, reset] = useForm({
+        keywords: "",
+    })
+    
     const dispatch = useDispatch();
-    useEffect(() => {
-        allPlanets()
-    }, []) 
-    
-    useEffect(() => {
-      if(planetas){
-        setPlanets(planetas)
-      }
-    }, [planetas])
-
-    const [keywords, setKeywords] = useState('')
-    const [searchResult, setSearchResult] = useState([])
-    
-    const handleSearch = (e) =>{
-       e.preventDefault()
-            let result = planets.filter( element => element.name.toLowerCase().includes(keywords.toLowerCase()) )
-           
-            return setSearchResult(result)
-            
-        }
-    
-    
-
-    useEffect(() => {
-        dispatch(searchResultados(searchResult))
-    }, [searchResult])
-
-
+const handleSearch = (e) =>{
+    e.preventDefault()
+    if(keywords !== ''){
+        dispatch(searchResultados(keywords));
+        reset()
+        
+        
+    }
+    navigate("/resultados")
+}
     return (
         <SearchBar>
-            <form>
-            <Input type='search' onChange={(e) => setKeywords(e.target.value) } /><Button type='submit' onClick={(e)=> handleSearch(e)}><i class="fas fa-rocket"></i></Button>
+            <form onSubmit={handleSearch}>
+            <Input type='search' name="keywords" onChange={handleInputChange} value={keywords} /><Button type='submit' ><i className="fas fa-rocket"></i></Button>
             </form>
         </SearchBar>
     )

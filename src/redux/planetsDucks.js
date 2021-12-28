@@ -2,11 +2,11 @@ import axios from 'axios'
 
 // Const
 const dataInicial = {
-    allPlanets:[],
     array:[],
     count : 1 ,
     favorite:[],
-    searchResult:[]
+    searchResult:[],
+    keywords:''
 
 }
 const OBTENER_PLANETAS_EXITO ='OBTENER_PLANETAS_EXITO'
@@ -104,33 +104,22 @@ export const addToFavorite =(favorito) => (dispatch,getState) =>{
     })
 }
 
-export const allPlanets = () => async(dispatch,getState) =>{
 
-    const promises = [
-        axios.get(`https://swapi.dev/api/planets/?page=1`),
-        axios.get(`https://swapi.dev/api/planets/?page=2`),
-        axios.get(`https://swapi.dev/api/planets/?page=3`),
-        axios.get(`https://swapi.dev/api/planets/?page=4`),
-        axios.get(`https://swapi.dev/api/planets/?page=5`),
-        axios.get(`https://swapi.dev/api/planets/?page=6`)
-    ]
-    const promise = await Promise.all(promises)
-    let res = []
 
-    promise.forEach(element =>{
-        res= [...res,...element]
-    })
-    console.log('estamos en planeta ducks',res)
-    dispatch({
-        type:ALL_PLANETS_EXITO,
-        payload: res.data.results
-    })
-}
-
-export const searchResultados = (searchResult) => (dispatch,getState) =>{
+export const searchResultados = (keywords) => async (dispatch,getState) =>{
+    try{
+        const res = await axios.get(`https://swapi.dev/api/planets/?search=${keywords}`);
+        const data = await res.data;
+        console.log('la data',data.results)
+        dispatch({
+            type:SEARCH_RESULT,
+            payload: data.results,
+            keywords
+        })
+        
+    }  catch(error){
+        console.log(error)
+    }
+}  
     
-    dispatch({
-        type: SEARCH_RESULT,
-        payload: searchResult
-    })
-}
+

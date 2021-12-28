@@ -52,7 +52,7 @@ const Cards = () => {
 
     const planetas = useSelector((store) => store.planetas.array);
     const resultados = useSelector((store) =>store.planetas.searchResult)
-
+    console.log('el resultado en la card ' , resultados)
     useEffect(() => {
         dispatch(obtenerPlanetasAccion())
         
@@ -63,7 +63,7 @@ const Cards = () => {
        }, [favorito])
     return (
         <>
-        {(resultados.length === 0) ? 
+        { 
             planetas.map((item) => (
 
         <Container key={item.name}>
@@ -88,32 +88,9 @@ const Cards = () => {
             </div>
        
         </Container>
-            )):
-            (resultados.map(item => (
-                <Container key={item.name}>
-                <div>
-                    <PClassname>
-                    <Parrafos>Name</Parrafos>
-                    <CheckboxFavorite setFavorito={setFavorito} favorito={favorito} item={item} />
-                    </PClassname>
-                    <PValues>{item.name}</PValues>
-                </div>
-                <div className='diameter'>
-                    <Parrafos>Diameter</Parrafos>
-                    <PValues>{item.diameter}</PValues>
-                </div>
-                <div className='climate'>
-                    <Parrafos>Climate</Parrafos>
-                    <PValues>{item.climate}</PValues>
-                </div>
-                <div className='terrain'>
-                    <Parrafos>Terrain</Parrafos>
-                    <ValuesTerrain>{item.terrain}</ValuesTerrain>
-                </div>
-           
-            </Container>
-            )))
-        }
+            ))
+}
+            
         </>
     )
 }

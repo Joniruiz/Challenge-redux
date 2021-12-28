@@ -20,10 +20,9 @@ const Enlace = styled(Link)`
 
 
 const ParteDeAbajo = () => {
-
     return (
         <Container>
-            <Enlace to='/'>Planetas</Enlace>
+            <Enlace to='/'>Planetas </Enlace>
             <Enlace to="/favorite">Favoritos</Enlace>
         </Container>
     )
