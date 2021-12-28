@@ -42,8 +42,6 @@ export default function planetReducer (state = dataInicial,action){
 //Acciones
 export const obtenerPlanetasAccion = () => async (dispatch, getState) =>{
 
-    console.log('getstate', getState().planetas.count)
-
     const count = getState().planetas.count
     
     try {
@@ -51,6 +49,7 @@ export const obtenerPlanetasAccion = () => async (dispatch, getState) =>{
         dispatch({
             type:'OBTENER_PLANETAS_EXITO',
             payload: res.data.results
+            
         })
         
     }catch(error){
