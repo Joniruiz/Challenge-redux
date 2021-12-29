@@ -8,3 +8,5 @@ La lista de planetas debe permitir también guardar uno o más planetas como fav
 
 El Mayor desafio : Lo que mas me costo fue realizar el search.
 
+El proyecto puede ser visualizado ya deployado en <a href='https://nervous-chandrasekhar-01548b.netlify.app/'>Aqui puede ver el sitio</a>
+
