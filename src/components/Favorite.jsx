@@ -67,7 +67,7 @@ const Favorite = () => {
 
     const favorites = useSelector((store) => store.planetas.favorite);
 
-    console.log('que hay aca en favoritos ',favorites)
+    console.log('que hay aca en favoritosssssss ',favorites)
 
     useEffect(() => {
         

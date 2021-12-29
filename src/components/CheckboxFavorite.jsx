@@ -3,6 +3,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {makeStyles} from '@material-ui/core'
+import {addToFavorite} from "../redux/planetsDucks";
+import { useDispatch,} from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root:{
@@ -16,22 +18,16 @@ const useStyles = makeStyles(() => ({
     },
   }
 }));
-export default function IconCheckboxes({favorito,setFavorito,item}) {
+export default function IconCheckboxes({item}) {
 
-  
+  const dispatch = useDispatch()
 
-  const handleFavorite  = (planet) =>{
-    setFavorito([...favorito,planet])
-    
-}
-
-  
-   const styles = useStyles({color: "#whatevercoloryouwant"})
+  const styles = useStyles({color: "#whatevercoloryouwant"})
        
 
   return (
     <div>
-      <Checkbox onClick={()=>handleFavorite(item)} className={styles.root} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} />
+      <Checkbox onClick={()=>dispatch(addToFavorite(item))} className={styles.root} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} />
       
     </div>
   );

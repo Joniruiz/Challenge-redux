@@ -29,7 +29,8 @@ export default function planetReducer (state = dataInicial,action){
             return{...state,array:action.payload.array , count: action.payload.count}
        
         case ADD_TO_FAVORITE:
-            return{...state , favorite: action.payload}
+            return{...state ,favorite:[...state.favorite,action.payload]}
+        
         case ALL_PLANETS_EXITO:
             return {...state,allPlanets:action.payload}
         case SEARCH_RESULT:
@@ -97,9 +98,11 @@ export const prevPage = () => async (dispatch,getState) =>{
 
 export const addToFavorite =(favorito) => (dispatch,getState) =>{
 
+    console.log('aca esta el favorito',favorito)
+
     dispatch({
         type: ADD_TO_FAVORITE,
-        payload: favorito
+        payload:favorito
     })
 }
 
@@ -120,5 +123,6 @@ export const searchResultados = (keywords) => async (dispatch,getState) =>{
         console.log(error)
     }
 }  
-    
+
+
 
