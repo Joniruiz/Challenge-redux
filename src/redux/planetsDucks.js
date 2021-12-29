@@ -13,6 +13,7 @@ const OBTENER_PLANETAS_EXITO ='OBTENER_PLANETAS_EXITO'
 const NEXT_PAGE ='NEXT_PAGE'
 const PREV_PAGE = 'PREV_PAGE'
 const ADD_TO_FAVORITE = 'ADD_TO_FAVORITE'
+const REMOVE_TO_FAVORITE = 'REMOVE_TO_FAVORITE'
 const ALL_PLANETS_EXITO =  'ALL_PLANETS_EXITO' 
 const SEARCH_RESULT = 'SEARCH_RESULT'
 
@@ -30,6 +31,9 @@ export default function planetReducer (state = dataInicial,action){
        
         case ADD_TO_FAVORITE:
             return{...state ,favorite:[...state.favorite,action.payload]}
+        
+        case REMOVE_TO_FAVORITE:
+            return {...state, favorite: state.favorite.filter(element => element.name !== action.payload.name)}
         
         case ALL_PLANETS_EXITO:
             return {...state,allPlanets:action.payload}
@@ -98,15 +102,18 @@ export const prevPage = () => async (dispatch,getState) =>{
 
 export const addToFavorite =(favorito) => (dispatch,getState) =>{
 
-    console.log('aca esta el favorito',favorito)
-
     dispatch({
         type: ADD_TO_FAVORITE,
         payload:favorito
     })
+    
 }
-
-
+export const deleteFavorite = (removeFavorite) => (dispatch,getState) =>{
+    dispatch({
+        type:REMOVE_TO_FAVORITE,
+        payload:removeFavorite
+    })
+}
 
 export const searchResultados = (keywords) => async (dispatch,getState) =>{
     try{

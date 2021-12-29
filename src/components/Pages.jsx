@@ -4,9 +4,9 @@ import {nextPage,prevPage } from "../redux/planetsDucks";
 import styled from 'styled-components'
 
 const Paged = styled.div`
+  align-items:center;
   display:flex;
   justify-content:center;
-  align-items:center;
 `
 
 const NumberPage = styled.span`
@@ -16,26 +16,23 @@ const NumberPage = styled.span`
 `
 
 const ButtonPage = styled.button`
-  margin:5px 20px 5px 20px;
   background-color: black;
+  border:none;
+  border-radius:5px;
   color: yellow;
+  cursor:pointer;
+  font-weight:999;
+  margin:5px 20px 5px 20px;
   padding:15px;
   width:100px;
-  border-radius:5px;
-  border:none;
-  font-weight:999;
-  cursor:pointer;
 
   &:hover{
     background-color:yellow;
     color:black;
-    transition: 0.5s ease-in-out;
     font-weight:999;
+    transition: 0.5s ease-in-out;
   }
-`
-
-
-
+  `
 const Pages = () => {
 
     const count = useSelector((store) => store.planetas.count);

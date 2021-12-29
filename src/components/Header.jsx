@@ -4,16 +4,12 @@ import Logo from '../assets/Logo-SW.png'
 import Search from './Search'
 
 const Contenedor = styled.div `
-background:black;
-display : flex;
-padding:30px;
-justify-content:space-around;
-align-items: center;
+    align-items: center;
+    background:black;
+    display : flex;
+    justify-content:space-around;
+    padding:30px;
 `
-
-
-
-
 
 export const Header = () => {
     return (

@@ -11,25 +11,25 @@ const SearchBar = styled.div`
     width: 250px;
 `
 const Input = styled.input`
-border-radius: 10px;
-width:100%;
-margin-right:25px;
-background-color: rgba(238,236,159,0.3);
-padding:8px;
-color:yellow;
+    background-color: rgba(238,236,159,0.3);
+    border-radius: 10px;
+    color:yellow;
+    margin-right:25px;
+    outline:none;
+    padding:8px;
+    width:100%;
 
-outline:none;
 `
 const Button = styled.button`
-    position:absolute;
-    top:0px;
-    right: 46px;
-    height:35px;
     background-color:transparent;
     border:none;
     color:yellow;
     cursor:pointer;
+    height:35px;
+    position:absolute;
+    right: 46px;
     transition: 0.5s ease-in-out;
+    top:0px;
     &:hover{
         transform:scale(1.3);    
     }
@@ -37,19 +37,18 @@ const Button = styled.button`
 
 const Search = () => {
     
-   const navigate = useNavigate();
     const [{keywords}, handleInputChange, reset] = useForm({
         keywords: "",
     })
     
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-const handleSearch = (e) =>{
+
+    const handleSearch = (e) =>{
     e.preventDefault()
     if(keywords !== ''){
         dispatch(searchResultados(keywords));
-        reset()
-        
-        
+        reset()   
     }
     navigate("/resultados")
 }

@@ -21,13 +21,10 @@ const useStyles = makeStyles(() => ({
 export default function IconCheckboxes({item}) {
 
   const dispatch = useDispatch()
-
-  const styles = useStyles({color: "#whatevercoloryouwant"})
-       
-
+  const styles = useStyles()
   return (
     <div>
-      <Checkbox onClick={()=>dispatch(addToFavorite(item))} className={styles.root} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} />
+      <Checkbox id='input' onClick={()=>dispatch(addToFavorite(item))}  className={styles.root} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} />
       
     </div>
   );

@@ -6,18 +6,16 @@ import {Link} from 'react-router-dom';
 const Container = styled.div`
     background-color:black;
     border-top: 1px solid white;
+    display:flex;
     justify-content:space-around;
-    display:flex
     
 `
 const Enlace = styled(Link)`
+    color: white;
     font-size:24px;
     padding:8px;
-    color: white;
     text-decoration:none;
 ` 
-
-
 
 const ParteDeAbajo = () => {
     return (
